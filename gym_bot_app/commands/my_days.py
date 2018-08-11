@@ -30,10 +30,10 @@ class MyDaysCommand(Command):
 
         training_days = ', '.join(day.name for day in trainee.training_days.filter(selected=True))
         if training_days:  # trainee has selected training days.
-            self.logger.debug('Trainee days %s', training_days)
+            self.logger.debug('TeamLeader days %s', training_days)
             update.message.reply_text(quote=True, text=training_days)
         else:  # trainee did not select any training days.
-            self.logger.debug('Trainee does not have any training days')
+            self.logger.debug('TeamLeader does not have any training days')
             select_days_keyboard = SelectDaysCommand.get_select_days_keyboard(trainee=trainee)
             update.message.reply_text(quote=True,
                                       text=self.NO_DAYS_SELECTED_MESSAGE,

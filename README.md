@@ -1,2 +1,8 @@
-# GymBot
-telegram gym bot
+# Rashatzim Bot
+
+## About
+This bot is a managment bot for rashatzim groups in Telegram.
+
+## Installation
+* Using heroku app
+

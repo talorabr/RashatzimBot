@@ -38,21 +38,21 @@ class Day(EmbeddedDocument):
         return repr(self)
 
 
-class Trainee(Document):
+class TeamLeader(Document):
     id = StringField(required=True, primary_key=True)
     first_name = StringField(required=True)
     training_days = EmbeddedDocumentListField(Day)
 
-    class TraineeQuerySet(ExtendedQuerySet):
+    class TeamLeaderQuerySet(ExtendedQuerySet):
         def create(self, id, first_name):
             training_days = Day.get_week_days()
 
-            return super(Trainee.TraineeQuerySet, self).create(id=unicode(id),
-                                                               first_name=unicode(first_name),
-                                                               training_days=training_days)
+            return super(TeamLeader.TeamLeaderQuerySet, self).create(id=unicode(id),
+                                                                     first_name=unicode(first_name),
+                                                                     training_days=training_days)
 
     meta = {
-        'queryset_class': TraineeQuerySet,
+        'queryset_class': TeamLeaderQuerySet,
     }
 
     def unselect_all_days(self):
@@ -152,7 +152,7 @@ class Trainee(Document):
             return 0.
 
     def get_training_statistics(self):
-        """Trainee training statistics.
+        """TeamLeader training statistics.
 
         Calculate training statistics based on the TrainingDaysInfo of the trainee.
 
@@ -180,7 +180,7 @@ class Trainee(Document):
         return Group.objects.filter(trainees__contains=self)
 
     def __repr__(self):
-        return '<Trainee {id} {first_name}>'.format(id=self.id,
+        return '<TeamLeader {id} {first_name}>'.format(id=self.id,
                                                     first_name=self.first_name)
 
     def __str__(self):
@@ -191,7 +191,7 @@ class Trainee(Document):
 
 
 class TrainingDayInfo(Document):
-    trainee = LazyReferenceField(document_type=Trainee)
+    trainee = LazyReferenceField(document_type=TeamLeader)
     date = DateTimeField(default=datetime.now)
     trained = BooleanField()
 
@@ -215,7 +215,7 @@ class TrainingDayInfo(Document):
 
 class Group(Document):
     id = StringField(required=True, primary_key=True)
-    trainees = ListField(CachedReferenceField(Trainee, auto_sync=True))
+    trainees = ListField(CachedReferenceField(TeamLeader, auto_sync=True))
 
     class GroupQuerySet(ExtendedQuerySet):
         def create(self, id, trainees=[]):

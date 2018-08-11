@@ -40,7 +40,7 @@ def trainee_already_marked_training_date(trainee, training_date):
     If trainee already has training day info it means he/she answered marked the given date.
 
     Args:
-        trainee(models.Trainee): trainee instance to check whether already marked the given date.
+        trainee(models.TeamLeader): trainee instance to check whether already marked the given date.
         training_date(datetime.date): training date to check.
 
     Returns:

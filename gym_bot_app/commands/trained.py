@@ -35,7 +35,7 @@ class TrainedCommand(Command):
 
         today_date = datetime.now().date()
         if trainee_already_marked_training_date(trainee=trainee, training_date=today_date):
-            self.logger.debug('Trainee already reported today about training status')
+            self.logger.debug('TeamLeader already reported today about training status')
             update.message.reply_text(quote=True, text=self.ALREADY_REPORTED_TRAINING_STATUS_MSG)
         else:
             update.message.reply_text(quote=True, text=self.TRAINED_TODAY_MSG)

@@ -7,7 +7,7 @@ import threading
 
 from telegram.error import TimedOut
 
-from gym_bot_app.models import Group, Trainee
+from gym_bot_app.models import Group, TeamLeader
 from gym_bot_app.utils import get_bot_and_update_from_args
 
 
@@ -39,7 +39,7 @@ def get_group(func):
 def get_trainee_and_group(func):
     """Decorator to insert trainee and group as arguments to the given function.
 
-    Creates new Trainee if did not exist in DB.
+    Creates new TeamLeader if did not exist in DB.
     Creates new Group if did not exist in DB.
     Adds the trainee to the group if it was not part of it.
     Appends the trainee and group as last argument of the function.
@@ -59,10 +59,10 @@ def get_trainee_and_group(func):
         bot, update = get_bot_and_update_from_args(args)
 
         trainee_id = update.effective_user.id
-        trainee = Trainee.objects.get(id=trainee_id)
+        trainee = TeamLeader.objects.get(id=trainee_id)
         if trainee is None:  # new trainee.
-            trainee = Trainee.objects.create(id=trainee_id,
-                                             first_name=update.effective_user.first_name)
+            trainee = TeamLeader.objects.create(id=trainee_id,
+                                                first_name=update.effective_user.first_name)
 
         group = args[-1]
         if trainee not in group.trainees:

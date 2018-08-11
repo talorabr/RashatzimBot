@@ -82,11 +82,11 @@ class WentToGymTask(Task):
         self.logger.debug('Answered by %s and selected day was %s', trainee, question_date)
 
         if trainee.is_training_in_day(day_name=question_date.strftime('%A')) is False:
-            self.logger.debug('Trainee is not allowed to answer the question')
+            self.logger.debug('TeamLeader is not allowed to answer the question')
             bot.answerCallbackQuery(text=self.NOT_YOUR_DAY_TO_TRAIN_MSG,
                                     callback_query_id=update.callback_query.id)
         elif trainee_already_marked_training_date(trainee=trainee, training_date=question_date):
-            self.logger.debug('Trainee already answered to went to gym question')
+            self.logger.debug('TeamLeader already answered to went to gym question')
             bot.answerCallbackQuery(text=self.ALREADY_ANSWERED_WENT_TO_GYM_QUESTION_MSG,
                                     callback_query_id=update.callback_query.id)
         else:

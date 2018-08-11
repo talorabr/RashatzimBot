@@ -48,7 +48,7 @@ def trainee_select_days_inline_keyboard(trainee, callback_identifier):
     callback_data is in form of (callback identifier, selected trainee id, selected day name)
 
     Args:
-        trainee(models.Trainee): trainee to generate keyboard for.
+        trainee(models.TeamLeader): trainee to generate keyboard for.
         callback_identifier(str | unicode): identifier of the callback handler which will be executed once keyboard is used.
 
     Returns:

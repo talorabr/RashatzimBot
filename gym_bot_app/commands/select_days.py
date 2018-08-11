@@ -50,7 +50,7 @@ class SelectDaysCommand(Command):
         Using this keyboard cause the response to be handled by the SelectDaysCommand response handler.
 
         Args:
-            trainee(models.Trainee): trainee to generate the keyboard for.
+            trainee(models.TeamLeader): trainee to generate the keyboard for.
 
         """
         return trainee_select_days_inline_keyboard(trainee=trainee,
@@ -70,7 +70,7 @@ class SelectDaysCommand(Command):
         _, trainee_id, selected_day = query.data.split()
 
         if trainee.id != unicode(trainee_id):  # other trainee tried to select days for this trainee
-            self.logger.debug('Trainee is not allow to choose for others')
+            self.logger.debug('TeamLeader is not allow to choose for others')
             bot.answerCallbackQuery(text=self.CANT_CHOOSE_TO_OTHERS_MSG,
                                     callback_query_id=update.callback_query.id,
                                     parse_mode=ParseMode.HTML)
