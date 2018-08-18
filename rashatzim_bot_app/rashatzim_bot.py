@@ -15,7 +15,7 @@ from rashatzim_bot_app.commands import (AdminCommand,
 from rashatzim_bot_app.tasks import (BringFoodTask,
                                      WentToGymTask,
                                      NewWeekSelectDaysTask)
-from rashatzim_bot_app.register_user import RegisterUser
+from rashatzim_bot_app.register_user import on_new_member, on_left_member
 
 
 MSG_TIMEOUT = 20
@@ -30,15 +30,14 @@ logging.basicConfig(filename='logs/rashatzimbot.log',
 def run_rashatzim_bot(token, logger):
     updater = Updater(token=token)
     dispatcher = updater.dispatcher
-    register_user = RegisterUser(updater=updater, logger=logger)
 
     """ Handlers """
     dispatcher.add_handler(
         MessageHandler(Filters.status_update.new_chat_members & ~Filters.user(user_id=updater.bot.id),
-                       register_user.on_new_member))
+                       on_new_member))
     dispatcher.add_handler(
         MessageHandler(Filters.status_update.left_chat_member & ~Filters.user(user_id=updater.bot.id),
-                       register_user.on_left_member))
+                       on_left_member))
 
     """ Tasks """
     BringFoodTask(updater=updater, logger=logger).start()
