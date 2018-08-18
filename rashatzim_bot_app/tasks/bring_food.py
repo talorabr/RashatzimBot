@@ -11,9 +11,9 @@ from rashatzim_bot_app.decorators import repeats, run_for_all_groups
 class BringFoodTask(Task):
     """Telegram rashatzim bot bring food task."""
     DEFAULT_TARGET_DAY = 'Saturday'
-    DEFAULT_TARGET_TIME = time(hour=21, minute=30, second=0, microsecond=0)
+    DEFAULT_TARGET_TIME = time(hour=22, minute=45, second=0, microsecond=0)
 
-    BRING_FOOD_INDIVIDUAL = 'תורך להביא מחר אוכל {team_leader}'
+    BRING_FOOD_INDIVIDUAL = 'תורך להביא מחר אוכל @{team_leader}'
 
     def __init__(self, target_day=None, target_time=None, *args, **kwargs):
         super(BringFoodTask, self).__init__(*args, **kwargs)
@@ -25,7 +25,7 @@ class BringFoodTask(Task):
         return self._seconds_until_day_and_time(target_day_name=self.target_day,
                                                 target_time=self.target_time)
 
-    @repeats(every_seconds=timedelta(days=1).total_seconds())
+    @repeats(every_seconds=timedelta(weeks=1).total_seconds())
     @run_for_all_groups
     def execute(self, group):
         """Override method to execute bring food task.
