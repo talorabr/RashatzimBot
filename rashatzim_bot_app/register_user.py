@@ -16,18 +16,22 @@ def on_new_member(bot, update):
     group_id = update.message.chat.id
     logger.info('new members in %d: %d new members', group_id, len(update.message.new_chat_members))
 
-    print "I am here!"
     group = Group.objects.get(id=group_id)
     if group is None:
+        logger.info('creating group %d', group_id)
         group = Group.objects.create(id=group_id)
 
     for user in update.message.new_chat_members:
+        logger.info('handling user %d', user.id)
         team_leader_id = user.id
         team_leader = TeamLeader.objects.get(id=team_leader_id)
         if team_leader is None:  # new team leader
+            number_of_times_brought_food = min(group.team_leaders, key=attrgetter('number_of_times_brought_food')).\
+                number_of_times_brought_food if group.team_leaders else 0
+
             team_leader = TeamLeader.objects.create(id=team_leader_id,
                                                 first_name=user.first_name,
-                                                number_of_times_brought_food=min(group.team_leaders, attrgetter('number_of_times_brought_food')).number_of_times_brought_food)
+                                                number_of_times_brought_food=number_of_times_brought_food)
 
         if team_leader not in group.team_leaders:
             group.add_team_leader(new_team_leader=team_leader)
