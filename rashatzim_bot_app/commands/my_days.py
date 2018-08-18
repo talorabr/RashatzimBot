@@ -1,9 +1,9 @@
 # encoding: utf-8
 from __future__ import unicode_literals
 
-from gym_bot_app.decorators import get_trainee_and_group
-from gym_bot_app.commands import (Command,
-                                  SelectDaysCommand)
+from rashatzim_bot_app.decorators import get_team_leader_and_group
+from rashatzim_bot_app.commands import (Command,
+                                        SelectDaysCommand)
 
 
 class MyDaysCommand(Command):
@@ -18,7 +18,7 @@ class MyDaysCommand(Command):
     def __init__(self, *args, **kwargs):
         super(MyDaysCommand, self).__init__(*args, **kwargs)
 
-    @get_trainee_and_group
+    @get_team_leader_and_group
     def _handler(self, bot, update, trainee, group):
         """Override method to handle my days command.
 

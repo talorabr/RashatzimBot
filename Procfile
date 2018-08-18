@@ -1,1 +1,1 @@
-worker: python gym_bot_app/gym_bot.py test
+worker: python rashatzim_bot_app/rashatzim_bot.py test

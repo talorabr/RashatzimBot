@@ -7,9 +7,9 @@ from telegram import error
 from telegram.ext import CallbackQueryHandler
 from telegram.vendor.ptb_urllib3.urllib3 import Timeout
 
-from gym_bot_app.keyboards import all_group_participants_select_days_inline_keyboard
-from gym_bot_app.tasks import Task
-from gym_bot_app.decorators import get_trainee_and_group, repeats, run_for_all_groups
+from rashatzim_bot_app.keyboards import all_group_participants_select_days_inline_keyboard
+from rashatzim_bot_app.tasks import Task
+from rashatzim_bot_app.decorators import get_team_leader_and_group, repeats, run_for_all_groups
 
 
 class NewWeekSelectDaysTask(Task):
@@ -67,7 +67,7 @@ class NewWeekSelectDaysTask(Task):
         except Timeout:
             self.logger.error('Timeout occurred')
 
-    @get_trainee_and_group
+    @get_team_leader_and_group
     def new_week_selected_day_callback_query(self, bot, update, trainee, group):
         """Response handler of new week select days task.
 

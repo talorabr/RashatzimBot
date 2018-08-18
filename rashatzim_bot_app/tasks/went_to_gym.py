@@ -5,12 +5,12 @@ from datetime import time, timedelta, datetime
 
 from telegram.ext import CallbackQueryHandler
 
-from gym_bot_app.tasks import Task
-from gym_bot_app.utils import trainee_already_marked_training_date, \
+from rashatzim_bot_app.tasks import Task
+from rashatzim_bot_app.utils import trainee_already_marked_training_date, \
     get_trainees_that_selected_today_and_did_not_train_yet
-from gym_bot_app.keyboards import yes_or_no_inline_keyboard, YES_RESPONSE
-from gym_bot_app.decorators import repeats, run_for_all_groups, get_trainee_and_group
-from gym_bot_app import THUMBS_UP_EMOJI, THUMBS_DOWN_EMOJI, FACEPALMING_EMOJI
+from rashatzim_bot_app.keyboards import yes_or_no_inline_keyboard, YES_RESPONSE
+from rashatzim_bot_app.decorators import repeats, run_for_all_groups, get_team_leader_and_group
+from rashatzim_bot_app import THUMBS_UP_EMOJI, THUMBS_DOWN_EMOJI, FACEPALMING_EMOJI
 
 
 class WentToGymTask(Task):
@@ -67,7 +67,7 @@ class WentToGymTask(Task):
         else:
             self.logger.debug('There are no relevant trainees')
 
-    @get_trainee_and_group
+    @get_team_leader_and_group
     def went_to_gym_callback_query(self, bot, update, trainee, group):
         """Response handler of went to gym task.
 

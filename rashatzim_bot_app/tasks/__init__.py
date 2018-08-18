@@ -1,0 +1,4 @@
+from rashatzim_bot_app.tasks.task import Task
+from rashatzim_bot_app.tasks.bring_food import BringFoodTask
+from rashatzim_bot_app.tasks.went_to_gym import WentToGymTask
+from rashatzim_bot_app.tasks.new_week_select_days import NewWeekSelectDaysTask

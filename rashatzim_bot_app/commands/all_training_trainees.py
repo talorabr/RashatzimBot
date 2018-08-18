@@ -1,9 +1,9 @@
 # encoding: utf-8
 from __future__ import unicode_literals
 
-from gym_bot_app.models import Day
-from gym_bot_app.commands import Command
-from gym_bot_app.decorators import get_group
+from rashatzim_bot_app.models import Day
+from rashatzim_bot_app.commands import Command
+from rashatzim_bot_app.decorators import get_group
 
 
 class AllTrainingTraineesCommand(Command):

@@ -4,11 +4,12 @@ from __future__ import unicode_literals
 import logging
 import functools
 import threading
+from operator import attrgetter
 
 from telegram.error import TimedOut
 
-from gym_bot_app.models import Group, TeamLeader
-from gym_bot_app.utils import get_bot_and_update_from_args
+from rashatzim_bot_app.models import Group, TeamLeader
+from rashatzim_bot_app.utils import get_bot_and_update_from_args
 
 
 def get_group(func):
@@ -36,7 +37,7 @@ def get_group(func):
     return wrapper
 
 
-def get_trainee_and_group(func):
+def get_team_leader_and_group(func):
     """Decorator to insert trainee and group as arguments to the given function.
 
     Creates new TeamLeader if did not exist in DB.
@@ -45,7 +46,7 @@ def get_trainee_and_group(func):
     Appends the trainee and group as last argument of the function.
 
     Example:
-        @get_trainee_and_group
+        @get_team_leader_and_group
         def run(bot, update, trainee, group):
             ....
 
@@ -58,17 +59,18 @@ def get_trainee_and_group(func):
     def wrapper(*args, **kwargs):
         bot, update = get_bot_and_update_from_args(args)
 
-        trainee_id = update.effective_user.id
-        trainee = TeamLeader.objects.get(id=trainee_id)
-        if trainee is None:  # new trainee.
-            trainee = TeamLeader.objects.create(id=trainee_id,
-                                                first_name=update.effective_user.first_name)
-
         group = args[-1]
-        if trainee not in group.trainees:
-            group.add_trainee(new_trainee=trainee)
+        team_leader_id = update.effective_user.id
+        team_leader = TeamLeader.objects.get(id=team_leader_id)
+        if team_leader is None:  # new trainee.
+            team_leader = TeamLeader.objects.create(id=team_leader_id,
+                                                first_name=update.effective_user.first_name,
+                                                number_of_times_brought_food=min(group.team_leaders, key=attrgetter('number_of_times_brought_food')).number_of_times_brought_food)
 
-        args_with_trainee_and_group = args[:-1] + (trainee, group)
+        if team_leader not in group.team_leaders:
+            group.add_team_leader(new_team_leader=team_leader)
+
+        args_with_trainee_and_group = args[:-1] + (team_leader, group)
         return func(*args_with_trainee_and_group, **kwargs)
 
     return wrapper

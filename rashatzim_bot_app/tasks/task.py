@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import threading
 from datetime import datetime, timedelta
 
-from gym_bot_app.utils import number_of_days_until_next_day
+from rashatzim_bot_app.utils import number_of_days_until_next_day
 
 
 class Task(object):

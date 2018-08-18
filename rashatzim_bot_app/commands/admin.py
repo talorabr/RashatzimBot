@@ -3,11 +3,11 @@ from __future__ import unicode_literals
 
 import argparse
 
-from gym_bot_app.models import Admin
-from gym_bot_app.commands import Command
-from gym_bot_app.tasks import (GoToGymTask,
-                               WentToGymTask,
-                               NewWeekSelectDaysTask)
+from rashatzim_bot_app.models import Admin
+from rashatzim_bot_app.commands import Command
+from rashatzim_bot_app.tasks import (BringFoodTask,
+                                     WentToGymTask,
+                                     NewWeekSelectDaysTask)
 
 
 class AdminCommand(Command):
@@ -27,7 +27,7 @@ class AdminCommand(Command):
     SOMETHING_WENT_WRONG_MSG = 'exception'
 
     TASKS = {
-        'go_to_gym': GoToGymTask,
+        'go_to_gym': BringFoodTask,
         'went_to_gym': WentToGymTask,
         'new_week_select_days': NewWeekSelectDaysTask
     }

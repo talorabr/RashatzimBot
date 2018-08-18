@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 from datetime import datetime
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
-from gym_bot_app import WEIGHT_LIFTER_EMOJI
-from gym_bot_app.models import Day
+from rashatzim_bot_app import WEIGHT_LIFTER_EMOJI
+from rashatzim_bot_app.models import Day
 
 
 YES_RESPONSE = 'yes'

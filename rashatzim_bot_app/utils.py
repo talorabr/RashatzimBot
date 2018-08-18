@@ -4,7 +4,7 @@ from datetime import datetime
 
 import telegram
 
-from gym_bot_app import DAYS_NAME
+from rashatzim_bot_app import DAYS_NAME
 
 
 def day_name_to_day_idx(day_name):

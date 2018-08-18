@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 from telegram import ParseMode, error
 from telegram.ext import CallbackQueryHandler
 
-from gym_bot_app.commands import Command
-from gym_bot_app.keyboards import trainee_select_days_inline_keyboard
-from gym_bot_app.decorators import get_trainee_and_group
+from rashatzim_bot_app.commands import Command
+from rashatzim_bot_app.keyboards import trainee_select_days_inline_keyboard
+from rashatzim_bot_app.decorators import get_team_leader_and_group
 
 
 class SelectDaysCommand(Command):
@@ -29,7 +29,7 @@ class SelectDaysCommand(Command):
                                  callback=self.selected_day_callback_query),  # selected training day
         )
 
-    @get_trainee_and_group
+    @get_team_leader_and_group
     def _handler(self, bot, update, trainee, group):
         """Override method to handle select days command.
 
@@ -56,7 +56,7 @@ class SelectDaysCommand(Command):
         return trainee_select_days_inline_keyboard(trainee=trainee,
                                                    callback_identifier=cls.SELECT_DAYS_QUERY_IDENTIFIER)
 
-    @get_trainee_and_group
+    @get_team_leader_and_group
     def selected_day_callback_query(self, bot, update, trainee, group):
         """Response handler of select days command.
 

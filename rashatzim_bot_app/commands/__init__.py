@@ -1,0 +1,7 @@
+from rashatzim_bot_app.commands.command import Command
+from rashatzim_bot_app.commands.admin import AdminCommand
+from rashatzim_bot_app.commands.select_days import SelectDaysCommand
+from rashatzim_bot_app.commands.my_days import MyDaysCommand
+from rashatzim_bot_app.commands.my_statistics import MyStatisticsCommand
+from rashatzim_bot_app.commands.trained import TrainedCommand
+from rashatzim_bot_app.commands.all_training_trainees import AllTrainingTraineesCommand

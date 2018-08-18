@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 
 from datetime import datetime
 
-from gym_bot_app.commands import Command
-from gym_bot_app import FACEPALMING_EMOJI
-from gym_bot_app.decorators import get_trainee_and_group
-from gym_bot_app.utils import trainee_already_marked_training_date
+from rashatzim_bot_app.commands import Command
+from rashatzim_bot_app import FACEPALMING_EMOJI
+from rashatzim_bot_app.decorators import get_team_leader_and_group
+from rashatzim_bot_app.utils import trainee_already_marked_training_date
 
 
 class TrainedCommand(Command):
@@ -23,7 +23,7 @@ class TrainedCommand(Command):
     def __init__(self, *args, **kwargs):
         super(TrainedCommand, self).__init__(*args, **kwargs)
 
-    @get_trainee_and_group
+    @get_team_leader_and_group
     def _handler(self, bot, update, trainee, group):
         """Override method to handle trained command.
 
