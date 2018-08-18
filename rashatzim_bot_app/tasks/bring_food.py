@@ -11,7 +11,7 @@ from rashatzim_bot_app.decorators import repeats, run_for_all_groups
 class BringFoodTask(Task):
     """Telegram rashatzim bot bring food task."""
     DEFAULT_TARGET_DAY = 'Saturday'
-    DEFAULT_TARGET_TIME = time(hour=22, minute=45, second=0, microsecond=0)
+    DEFAULT_TARGET_TIME = time(hour=22, minute=50, second=0, microsecond=0)
 
     BRING_FOOD_INDIVIDUAL = 'תורך להביא מחר אוכל @{team_leader}'
 
