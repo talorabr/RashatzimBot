@@ -8,6 +8,7 @@ from telegram.ext.dispatcher import run_async
 from rashatzim_bot_app.models import Group, TeamLeader
 
 logger = logging.getLogger(__name__)
+logger.addHandler(logging.StreamHandler())
 
 
 @run_async
@@ -15,6 +16,7 @@ def on_new_member(bot, update):
     group_id = update.message.chat.id
     logger.info('new members in %d: %d new members', group_id, len(update.message.new_chat_members))
 
+    print "I am here!"
     group = Group.objects.get(id=group_id)
     if group is None:
         group = Group.objects.create(id=group_id)
