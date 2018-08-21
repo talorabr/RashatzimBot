@@ -42,7 +42,7 @@ def import_tasks(group):
     logger.info("callback_minute %s", callback_minute)
     for taskname in ('bring_food',):
         task = getattr(importlib.import_module('tasks.{taskname}'.format(taskname=taskname)), 'task')
-        logger.info('task imported: name=%s callback=%s interval=%d first=%d', task.name, task.callback, task.first or 0)
+        logger.info('task imported: name=%s callback=%s interval=%d first=%d', task.name, task.callback, task.interval, task.first or 0)
         job_queue.run_repeating(callback=task.callback, interval=task.interval, first=task.first or 0, context=group.id)
 
 
