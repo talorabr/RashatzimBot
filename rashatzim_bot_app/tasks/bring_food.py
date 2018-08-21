@@ -15,7 +15,7 @@ BRING_FOOD_MSG = u'תורך להביא היום אוכל {team_leader}'
 
 def callback_bring_food(bot, job):
     group = Group.objects.get(id=job.context)
-    logger.info("starting callback for bring_food task for group %s", group)
+    logger.info("starting callback for bring_food task for group %s %s", group, group.team_leaders)
 
     team_leader_to_bring_food = min(group.team_leaders, key=attrgetter('number_of_times_brought_food'))
     if team_leader_to_bring_food is None:
