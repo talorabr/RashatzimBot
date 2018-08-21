@@ -5,17 +5,8 @@ import logging
 import os
 import importlib
 
-from telegram.ext import Updater, MessageHandler, Filters
 from telegram.ext.dispatcher import run_async
 
-from rashatzim_bot_app.commands import (AdminCommand,
-                                        MyDaysCommand,
-                                        TrainedCommand,
-                                        SelectDaysCommand,
-                                        MyStatisticsCommand,
-                                        AllTrainingTraineesCommand)
-from rashatzim_bot_app.tasks import (WentToGymTask,
-                                     NewWeekSelectDaysTask)
 from rashatzim_bot_app.bot import updater, dispatcher
 from rashatzim_bot_app.decorators import run_for_all_groups
 
