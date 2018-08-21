@@ -38,17 +38,15 @@ def error_callback(bot, update, error):
 @run_for_all_groups
 def import_tasks(group):
     job_queue = updater.job_queue
-    from tasks.bring_food import callback_minute
-    job_queue.run_repeating(callback=callback_minute, interval=60, first=0, context=group.id)
-    # for taskname in ('bring_food',):
-    #     task = getattr(importlib.import_module('tasks.{taskname}'.format(taskname=taskname)), 'task')
-    #     logger.info('task imported: %s', task.name)
-    #     job_queue.run_repeating(callback=task.callback, interval=task.interval, first=task.first or 0, context=group.id)
+    for taskname in ('bring_food',):
+        task = getattr(importlib.import_module('rashatzim_bot_app.tasks.{taskname}'.format(taskname=taskname)), 'task')
+        logger.info('task imported: %s', task.name)
+        job_queue.run_repeating(callback=task.callback, interval=task.interval, first=task.first or 0, context=group.id)
 
 
 def import_modules():
     for modname in ('register_user',):
-        module = getattr(importlib.import_module('modules.{modname}'.format(modname=modname)), 'module')
+        module = getattr(importlib.import_module('rashatzim_bot_app.modules.{modname}'.format(modname=modname)), 'module')
         logger.info('module imported: %s (handlers: %d)', module.name, len(module.handlers))
         for handler in module.handlers:
             dispatcher.add_handler(handler)

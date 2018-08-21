@@ -8,7 +8,7 @@ logger.addHandler(logging.StreamHandler())
 
 
 def callback_minute(bot, job):
-    logger.info("starting callback for bring_food task, chat id: %d!", job.context)
+    logger.info("starting callback for bring_food task for group %s", job.context)
     bot.send_message(chat_id=job.context, text='SPAM FOR SOUFI')
 
 
