@@ -38,10 +38,12 @@ def error_callback(bot, update, error):
 @run_for_all_groups
 def import_tasks(group):
     job_queue = updater.job_queue
-    for taskname in ('bring_food',):
-        task = getattr(importlib.import_module('tasks.{taskname}'.format(taskname=taskname)), 'task')
-        logger.info('task imported: %s', task.name)
-        job_queue.run_repeating(callback=task.callback, interval=task.interval, first=task.first or 0, context=group.id)
+    from tasks.bring_food import callback_minute
+    job_queue.run_repeating(callback=callback_minute, interval=60, first=0, context=group.id)
+    # for taskname in ('bring_food',):
+    #     task = getattr(importlib.import_module('tasks.{taskname}'.format(taskname=taskname)), 'task')
+    #     logger.info('task imported: %s', task.name)
+    #     job_queue.run_repeating(callback=task.callback, interval=task.interval, first=task.first or 0, context=group.id)
 
 
 def import_modules():
