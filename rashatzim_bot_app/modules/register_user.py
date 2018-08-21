@@ -5,7 +5,7 @@ from telegram.ext import Filters
 from telegram.ext import MessageHandler
 from telegram.ext.dispatcher import run_async
 
-from rashatzim_bot_app.rashatzim_bot import import_tasks
+from rashatzim_bot_app.tasks import import_tasks
 from rashatzim_bot_app.models import Group, TeamLeader
 from rashatzim_bot_app.bot import updater
 

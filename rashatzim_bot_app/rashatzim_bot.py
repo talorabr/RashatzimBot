@@ -9,6 +9,7 @@ from telegram.ext.dispatcher import run_async
 
 from rashatzim_bot_app.bot import updater, dispatcher
 from rashatzim_bot_app.decorators import run_for_all_groups
+from rashatzim_bot_app.tasks import import_tasks
 
 MSG_TIMEOUT = 20
 
