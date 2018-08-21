@@ -5,8 +5,7 @@ import argparse
 
 from rashatzim_bot_app.models import Admin
 from rashatzim_bot_app.commands import Command
-from rashatzim_bot_app.tasks import (BringFoodTask,
-                                     WentToGymTask,
+from rashatzim_bot_app.tasks import (WentToGymTask,
                                      NewWeekSelectDaysTask)
 
 

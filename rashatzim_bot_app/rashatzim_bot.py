@@ -14,8 +14,7 @@ from rashatzim_bot_app.commands import (AdminCommand,
                                         SelectDaysCommand,
                                         MyStatisticsCommand,
                                         AllTrainingTraineesCommand)
-from rashatzim_bot_app.tasks import (BringFoodTask,
-                                     WentToGymTask,
+from rashatzim_bot_app.tasks import (WentToGymTask,
                                      NewWeekSelectDaysTask)
 from rashatzim_bot_app.bot import updater, dispatcher
 from rashatzim_bot_app.decorators import run_for_all_groups
