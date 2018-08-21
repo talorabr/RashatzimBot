@@ -1,10 +1,15 @@
 # encoding: utf-8
 from __future__ import unicode_literals
-from datetime import datetime
+from datetime import datetime, timedelta
+import logging
 
 import telegram
 
 from rashatzim_bot_app import DAYS_NAME
+
+
+logger = logging.getLogger(__name__)
+logger.addHandler(logging.StreamHandler())
 
 
 def day_name_to_day_idx(day_name):
@@ -98,3 +103,35 @@ def get_bot_and_update_from_args(args):
     bot = find_instance_in_args(telegram.bot.Bot, args)
     update = find_instance_in_args(telegram.update.Update, args)
     return bot, update
+
+
+def _get_target_datetime_until_day_and_time(target_day_name, target_time):
+    """Calculate the number of seconds until the next occur of the target day and time.
+
+    Args:
+        target_day_name(str): name of the target day.
+        target_time(time.time): target time of the day.
+
+    Returns.
+        int. number of seconds until the given day and time.
+
+    """
+    logger.info('Requested target day is %s and time is %s', target_day_name, target_time)
+    now = datetime.today()
+    days_until_next_target_day = number_of_days_until_next_day(target_day_name)
+
+    target_datetime = now.replace(hour=target_time.hour,
+                                  minute=target_time.minute,
+                                  second=target_time.second,
+                                  microsecond=target_time.microsecond)
+
+    # if today is the requested day and the target time already passed.
+    if days_until_next_target_day is 0 and now.time() > target_time:
+        logger.debug('Today is the requested day but the time already passed, targeting time for next week')
+        target_datetime += timedelta(weeks=1)
+    else:
+        logger.debug('Number of days left until the target day is %s', days_until_next_target_day)
+        target_datetime += timedelta(days=days_until_next_target_day)
+
+    logger.debug('Requested target datetime is %s', target_datetime)
+    return target_datetime

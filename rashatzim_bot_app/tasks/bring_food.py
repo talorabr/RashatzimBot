@@ -2,7 +2,9 @@
 from __future__ import unicode_literals
 import logging
 from rashatzim_bot_app.models import Group
+from rashatzim_bot_app.utils import _get_target_datetime_until_day_and_time
 from operator import attrgetter
+from datetime import timedelta, time
 
 from telegram.utils.helpers import mention_html
 from telegram.parsemode import ParseMode
@@ -29,6 +31,6 @@ def callback_bring_food(bot, job):
 
 class task:
     name = 'bring_food'
-    interval = 60
-    first = 0
+    interval = timedelta(weeks=1)
+    first = _get_target_datetime_until_day_and_time('Saturday', time(hour=21, minute=30, second=0, microsecond=0))
     callback = (callback_bring_food,)
