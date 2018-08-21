@@ -23,6 +23,7 @@ def callback_bring_food(bot, job):
 
     team_leader_to_bring_food = min(group.team_leaders, key=attrgetter('number_of_times_brought_food'))
     logger.info("chosen team leader is: %s", team_leader_to_bring_food)
+    logger.info("mention_html: %s", mention_html(team_leader_to_bring_food.id, team_leader_to_bring_food.first_name))
     bring_food_msg = BRING_FOOD_MSG.format(mention_html(team_leader_to_bring_food.id, team_leader_to_bring_food.first_name))
     bot.send_message(chat_id=group.id, text=bring_food_msg, parse_mode=ParseMode.HTML)
 
