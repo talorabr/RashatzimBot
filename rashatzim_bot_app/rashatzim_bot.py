@@ -32,7 +32,7 @@ logger.addHandler(logging.StreamHandler())
 
 @run_async
 def error_callback(bot, update, error):
-    pass
+    logger.info("error %s", error)
 
 
 @run_for_all_groups

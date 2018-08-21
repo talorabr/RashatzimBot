@@ -31,8 +31,8 @@ def on_new_member(bot, update):
                 number_of_times_brought_food if group.team_leaders else 0
 
             team_leader = TeamLeader.objects.create(id=team_leader_id,
-                                                first_name=user.first_name,
-                                                number_of_times_brought_food=number_of_times_brought_food)
+                                                    first_name=user.first_name,
+                                                    number_of_times_brought_food=number_of_times_brought_food)
 
         if team_leader not in group.team_leaders:
             group.add_team_leader(new_team_leader=team_leader)
