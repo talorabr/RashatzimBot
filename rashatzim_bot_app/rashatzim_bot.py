@@ -71,7 +71,7 @@ def run_rashatzim_bot():
     import_modules()
     dispatcher.add_error_handler(error_callback)
 
-    updater.start_polling(clean=True)
+    updater.start_polling(poll_interval=MSG_TIMEOUT)
     updater.idle()
 
 
