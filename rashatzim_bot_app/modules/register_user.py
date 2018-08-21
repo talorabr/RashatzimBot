@@ -35,6 +35,7 @@ def on_new_member(bot, update):
                                                     number_of_times_brought_food=number_of_times_brought_food)
 
         if team_leader not in group.team_leaders:
+            logger.info('adding %s to %s', team_leader, group)
             group.add_team_leader(new_team_leader=team_leader)
 
 
