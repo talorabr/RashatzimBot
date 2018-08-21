@@ -12,7 +12,7 @@ from telegram.parsemode import ParseMode
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.StreamHandler())
 
-BRING_FOOD_MSG = u'תורך להביא היום אוכל {team_leader}'
+BRING_FOOD_MSG = u'תורך להביא מחר אוכל {team_leader}'
 
 
 def callback_bring_food(bot, job):
