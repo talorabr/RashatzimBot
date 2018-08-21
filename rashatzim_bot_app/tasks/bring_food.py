@@ -18,7 +18,7 @@ def callback_bring_food(bot, job):
     logger.info("starting callback for bring_food task for group %s %s", group, group.team_leaders)
 
     team_leader_to_bring_food = min(group.team_leaders, key=attrgetter('number_of_times_brought_food'))
-    if team_leader_to_bring_food is None:
+    if not team_leader_to_bring_food:
         logger.info("no one in group %s!", group)
         return
     bring_food_msg = BRING_FOOD_MSG.format(mention_html(team_leader_to_bring_food.id, team_leader_to_bring_food.first_name))
