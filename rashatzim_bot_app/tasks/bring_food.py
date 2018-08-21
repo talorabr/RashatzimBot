@@ -16,4 +16,4 @@ class task:
     name = 'bring_food'
     interval = 60
     first = 0
-    callback = callback_minute
+    callback = (callback_minute,)
