@@ -26,7 +26,7 @@ class AdminCommand(Command):
     SOMETHING_WENT_WRONG_MSG = 'exception'
 
     TASKS = {
-        'go_to_gym': BringFoodTask,
+        #'go_to_gym': BringFoodTask,
         'went_to_gym': WentToGymTask,
         'new_week_select_days': NewWeekSelectDaysTask
     }
