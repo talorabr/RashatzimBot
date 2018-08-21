@@ -35,13 +35,17 @@ def error_callback(bot, update, error):
     logger.info("error %s", error)
 
 
-@run_for_all_groups
 def import_tasks(group):
     job_queue = updater.job_queue
     for taskname in ('bring_food',):
         task = getattr(importlib.import_module('tasks.{taskname}'.format(taskname=taskname)), 'task')
         logger.info('task imported: name=%s callback=%s interval=%d first=%d', task.name, task.callback[0], task.interval, task.first or 0)
         job_queue.run_repeating(callback=task.callback[0], interval=task.interval, first=task.first or 0, context=group.id)
+
+
+@run_for_all_groups
+def import_tasks_all_groups(group):
+    import_tasks(group)
 
 
 def import_modules():
@@ -67,7 +71,7 @@ def run_rashatzim_bot():
     # MyStatisticsCommand(updater=updater, logger=logger).start()
     # AllTrainingTraineesCommand(updater=updater, logger=logger).start(command_name='all_the_botim')
 
-    import_tasks()
+    import_tasks_all_groups()
     import_modules()
     dispatcher.add_error_handler(error_callback)
 

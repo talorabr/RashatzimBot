@@ -5,6 +5,7 @@ from telegram.ext import Filters
 from telegram.ext import MessageHandler
 from telegram.ext.dispatcher import run_async
 
+from rashatzim_bot_app.rashatzim_bot import import_tasks
 from rashatzim_bot_app.models import Group, TeamLeader
 from rashatzim_bot_app.bot import updater
 
@@ -21,6 +22,7 @@ def on_new_member(bot, update):
     if group is None:
         logger.info('creating group %d', group_id)
         group = Group.objects.create(id=group_id)
+        import_tasks(group)
 
     for user in update.message.new_chat_members:
         logger.info('handling user %d', user.id)

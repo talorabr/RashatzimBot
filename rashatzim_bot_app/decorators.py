@@ -8,6 +8,7 @@ from operator import attrgetter
 
 from telegram.error import TimedOut
 
+from rashatzim_bot_app.rashatzim_bot import import_tasks
 from rashatzim_bot_app.models import Group, TeamLeader
 from rashatzim_bot_app.utils import get_bot_and_update_from_args
 
@@ -30,6 +31,7 @@ def get_group(func):
 
         if group is None:  # new group.
             group = Group.objects.create(id=group_id)
+            import_tasks(group)
 
         args_with_group = args + (group, )
         return func(*args_with_group, **kwargs)

@@ -106,7 +106,7 @@ class Group(Document):
     }
 
     def add_team_leader(self, new_team_leader):
-        self.update(push__team_leader=new_team_leader)
+        self.update(push__team_leaders=new_team_leader)
         return self
 
     def remove_team_leader(self, team_leader_id):
