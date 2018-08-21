@@ -6,6 +6,7 @@ from telegram.ext import MessageHandler
 from telegram.ext.dispatcher import run_async
 
 from rashatzim_bot_app.models import Group, TeamLeader
+from rashatzim_bot_app.bot import updater
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.StreamHandler())
@@ -46,3 +47,11 @@ def on_left_member(bot, update):
         return
 
     group.remove_team_leader(update.message.left_chat_member.id)
+
+
+class module:
+    name = 'register_user'
+    handlers = (
+        MessageHandler(Filters.status_update.new_chat_members & ~Filters.user(user_id=updater.bot.id), on_new_member),
+        MessageHandler(Filters.status_update.left_chat_member & ~Filters.user(user_id=updater.bot.id), on_left_member)
+    )
