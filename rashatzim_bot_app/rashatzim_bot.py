@@ -55,7 +55,7 @@ def run_rashatzim_bot():
     # MyStatisticsCommand(updater=updater, logger=logger).start()
     # AllTrainingTraineesCommand(updater=updater, logger=logger).start(command_name='all_the_botim')
 
-    logging.info("bot user id is: %s", updater.bot.id)
+    logging.info("bot user name is: %s", updater.bot.username)
     import_tasks_all_groups()
     import_modules()
     dispatcher.add_error_handler(error_callback)
