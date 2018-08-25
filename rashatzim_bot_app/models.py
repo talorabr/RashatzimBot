@@ -122,7 +122,11 @@ class Group(Document):
                 team_leader.delete()
 
     def __repr__(self):
-        return '<Group {id}: next meeting date: {next_meeting_date}>'.format(id=self.id, next_meeting_date=self.next_meeting_date)
+        return '<Group {id}: ' \
+               'next meeting date - {next_meeting_date}>, ' \
+               'regular meeting day - {regular_meeting_day}'.format(id=self.id,
+                                                                    next_meeting_date=self.next_meeting_date,
+                                                                    regular_meeting_day=self.regular_meeting_day)
 
     def __str__(self):
         return repr(self)
