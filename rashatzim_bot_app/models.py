@@ -103,15 +103,9 @@ class Group(Document):
                                                                                                           microsecond=0)))
 
     class GroupQuerySet(ExtendedQuerySet):
-        def create(self, id, team_leaders=[], next_meeting_date=_get_target_datetime_until_day_and_time('Sunday',
-                                                                                                        time(hour=12,
-                                                                                                             minute=0,
-                                                                                                             second=0,
-                                                                                                             microsecond=0)
-                                                                                                        )):
+        def create(self, id, team_leaders=[]):
             return super(Group.GroupQuerySet, self).create(id=unicode(id),
-                                                           team_leaders=team_leaders,
-                                                           next_meeting_date=next_meeting_date)
+                                                           team_leaders=team_leaders)
 
     meta = {
         'queryset_class': GroupQuerySet,
