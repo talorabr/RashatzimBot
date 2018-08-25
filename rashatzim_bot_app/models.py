@@ -95,16 +95,17 @@ class TrainingDayInfo(Document):
 
 class Group(Document):
     id = StringField(required=True, primary_key=True)
+    regular_meeting_day = StringField(required=True, default='Sunday')
+    next_meeting_date = DateTimeField(required=True)
     team_leaders = ListField(CachedReferenceField(TeamLeader, auto_sync=True))
-    next_meeting_date = DateTimeField(required=True, default=_get_target_datetime_until_day_and_time('Sunday',
-                                                                                                     time(hour=12,
-                                                                                                          minute=0,
-                                                                                                          second=0,
-                                                                                                          microsecond=0)))
 
     class GroupQuerySet(ExtendedQuerySet):
-        def create(self, id, team_leaders=[]):
+        def create(self, id, regular_meeting_day='Sunday', team_leaders=[]):
             return super(Group.GroupQuerySet, self).create(id=unicode(id),
+                                                           regular_meeting_day=regular_meeting_day,
+                                                           next_meeting_date=_get_target_datetime_until_day_and_time(
+                                                               regular_meeting_day, time(hour=12, minute=0,
+                                                                                         second=0, microsecond=0)),
                                                            team_leaders=team_leaders)
 
     meta = {
