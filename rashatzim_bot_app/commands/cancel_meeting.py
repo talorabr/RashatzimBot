@@ -26,7 +26,7 @@ class CancelMeetingCommand(Command):
 
         """
         self.logger.info('Cancel meeting in %s', group)
-        group = group.modify(new=True, set__next_meeting_date=group.next_meeting_date + timedelta(weeks=1))
+        group.modify(set__next_meeting_date=group.next_meeting_date + timedelta(weeks=1))
         self.logger.info('New meeting will occur in: %s', group.next_meeting_date)
         update.message.reply_text(quote=True,
                                   text=self.CANCEL_MEETING_MSG)

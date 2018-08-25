@@ -36,7 +36,7 @@ def callback_bring_food(bot, job):
     if current_day.date() == group.next_meeting_date.date():
         logger.info("meeting occurs today, updating parameters")
         group.modify(set__next_meeting_date=group.next_meeting_date + timedelta(weeks=1))
-        team_leader_to_bring_food.modify(upsert=True, new=True, inc__number_of_times_brought_food=1)
+        team_leader_to_bring_food.modify(inc__number_of_times_brought_food=1)
 
 
 class task:
