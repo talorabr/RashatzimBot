@@ -26,6 +26,10 @@ def on_new_member(bot, update):
 
     for user in update.message.new_chat_members:
         logger.info('handling user %d', user.id)
+        if user.id == bot.id:
+            logger.info("new user is the bot! skipping...")
+            continue
+
         team_leader_id = user.id
         team_leader = TeamLeader.objects.get(id=team_leader_id)
         if team_leader is None:  # new team leader

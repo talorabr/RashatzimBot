@@ -10,6 +10,7 @@ from telegram.ext.dispatcher import run_async
 from rashatzim_bot_app.bot import updater, dispatcher
 from rashatzim_bot_app.decorators import run_for_all_groups
 from rashatzim_bot_app.tasks import import_tasks
+from rashatzim_bot_app.commands import CancelMeetingCommand
 
 MSG_TIMEOUT = 20
 
@@ -54,8 +55,8 @@ def run_rashatzim_bot():
     # SelectDaysCommand(updater=updater, logger=logger).start()
     # MyStatisticsCommand(updater=updater, logger=logger).start()
     # AllTrainingTraineesCommand(updater=updater, logger=logger).start(command_name='all_the_botim')
+    CancelMeetingCommand(updater=updater, logger=logger).start()
 
-    logger.info("bot user id is: %s", updater.bot.id)
     import_tasks_all_groups()
     import_modules()
     dispatcher.add_error_handler(error_callback)

@@ -1,7 +1,7 @@
 # encoding: utf-8
 from __future__ import unicode_literals
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 
 from mongoengine import (Document,
                          ListField,
@@ -16,6 +16,7 @@ from mongoengine import (Document,
 
 from rashatzim_bot_app import DAYS_NAME
 from rashatzim_bot_app.query_sets import ExtendedQuerySet
+from rashatzim_bot_app.utils import _get_target_datetime_until_day_and_time
 
 
 class Day(EmbeddedDocument):
@@ -95,11 +96,22 @@ class TrainingDayInfo(Document):
 class Group(Document):
     id = StringField(required=True, primary_key=True)
     team_leaders = ListField(CachedReferenceField(TeamLeader, auto_sync=True))
+    next_meeting_date = DateTimeField(required=True, default=_get_target_datetime_until_day_and_time('Sunday',
+                                                                                                     time(hour=12,
+                                                                                                          minute=0,
+                                                                                                          second=0,
+                                                                                                          microsecond=0)))
 
     class GroupQuerySet(ExtendedQuerySet):
-        def create(self, id, team_leaders=[]):
+        def create(self, id, team_leaders=[], next_meeting_date=_get_target_datetime_until_day_and_time('Sunday',
+                                                                                                        time(hour=12,
+                                                                                                             minute=0,
+                                                                                                             second=0,
+                                                                                                             microsecond=0)
+                                                                                                        )):
             return super(Group.GroupQuerySet, self).create(id=unicode(id),
-                                                           team_leaders=team_leaders)
+                                                           team_leaders=team_leaders,
+                                                           next_meeting_date=next_meeting_date)
 
     meta = {
         'queryset_class': GroupQuerySet,
